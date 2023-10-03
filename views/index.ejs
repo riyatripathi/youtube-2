@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Website Name</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #888 #f1f1f1;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
+      }
+      html,
+      body {
+        height: 100%;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background: rgb(19, 19, 19);
+        background: linear-gradient(
+          157deg,
+          rgba(19, 19, 19, 1) 47%,
+          rgba(58, 58, 58, 1) 100%
+        );
+        background-repeat: no-repeat; /* Prevents background repetition */
+        background-size: cover; /* Ensures the background covers the entire element */
+        background-attachment: fixed; /* Keeps the background fixed during scrolling */
+        margin: 0; /* Reset default margin */
+        scrollbar-base-color: #888;
+        scrollbar-face-color: #888;
+        scrollbar-3dlight-color: #888;
+        scrollbar-highlight-color: #888;
+        scrollbar-track-color: #f1f1f1;
+        scrollbar-arrow-color: #888;
+        scrollbar-shadow-color: #888;
+        scrollbar-darkshadow-color: #888;
+      }
+
+      .youtube-color {
+        color: red;
+      }
+
+      .nav-border {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+      .nav-border-bottom {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .nav-border2 {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+
+      .text-black {
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .card {
+        margin: 0 auto;
+        width: 100%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-img-top {
+        height: 100%;
+        width:100%;
+        object-fit: cover;
+      }
+
+      .navbar {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .card {
+    margin: 0 auto;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;  /* Added this */
+}
+
+.card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.card-content img {
+    height: 50%;  /* Adjusted this */
+    width: 100%;
+    object-fit: cover;
+}
+
+
+    </style>
+  </head>
+
+  <body>
+    <!-- header -->
+
+    <div class="container-fluid">
+      <nav class="navbar nav-border fixed-top bg-dark">
+        <div class="container">
+          <!-- <a class="navbar-brand" href="#">
+                    <span class="youtube-color">
+                        <i class="fa-brands fa-youtube fa-2xl"></i> <i>Youtube</i>
+                    </span>
+                </a> -->
+          <form id="searchForm" class="d-block d-md-block mx-auto">
+            <input
+              id="searchInput"
+              class="form-control"
+              type="search"
+              placeholder="Product ID"
+              aria-label="Search"
+            />
+          </form>
+          <!-- reset button call load more data -->
+          <button class="btn btn-light" id="resetBtn">Reset</button>
+          <!-- <div class="d-flex justify-content-end">
+                    <span class="text-light">Youtube channel name</span>
+                </div> -->
+        </div>
+      </nav>
+      <!-- Search bar for smaller screens
+        <div class="d-block d-md-block bg-dark py-2 nav-border2">
+            <div class="container">
+                <form class="d-block" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    <input class="form-control" type="search" placeholder="Product ID" aria-label="Search">
+                </form>
+            </div>
+        </div> -->
+    </div>
+    <br /><br /><br />
+
+    <!-- cards -->
+
+    <div class="container mt-5">
+      <div class="row" id="cont">
+        
+      </div>
+    </div>
+    <!-- <div class="container mt-5" id="searchcont"></div> -->
+
+    <div id="loadMorePlaceholder" class="text-center my-5">
+      <button class="btn btn-light" id="loadMore">Click (Load More)</button>
+    </div>
+    <br /><br /><br /><br />
+
+    <!-- footer -->
+
+    <div class="container-fluid">
+      <nav class="navbar nav-border2 fixed-bottom bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="https://www.youtube.com/@sotrendzy" target="_blank">
+            <span class="youtube-color">
+              <i class="fa-brands fa-youtube fa-2xl"></i> <i>Youtube</i>
+            </span>
+          </a>
+          <div class="d-flex justify-content-end">
+            <a href="https://www.youtube.com/@sotrendzy" target="_blank" style="text-decoration: none;"><span class="text-light">SO TRENDZY</span></a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <script>
+
+let currentPage = 0;
+
+$('#resetBtn').click(() => {
+  $("#cont").empty();
+    currentPage = 0;
+    loadMoreData();
+    $("#loadMorePlaceholder").show();
+});
+
+$('#loadMore').click(() => {
+    loadMoreData();
+});
+
+const loadMoreData = () => {
+    // $("#loadMorePlaceholder").show();
+    $.ajax({
+        url: `/products?page=${currentPage}`,
+        method: "GET",
+        dataType: "json",
+        success: (results) => {
+            if (results.length) {
+                results.forEach((product) => {
+                    $("#cont").append(`
+                      <div class="col-6 col-sm-6 col-md-6 col-lg-3 mt-5">
+                        <a href="${product.affiliate_link}" target="_blank" style="text-decoration: none;">
+                        <div class="card" data-product-id="${product.product_id}">
+                          <img src="https://drive.google.com/uc?export=view&id=${product.product_link}" class="card-img-top" alt="..." />
+                          <div class="card-footer text-body-secondary text-center">
+                            Product Id: ${product.product_id}
+                          </div>
+                        </div>
+                      </a>
+                      </div>
+                    
+                    `);
+                });
+            } else {
+                // If no more data to load, hide the "Loading more..." placeholder.
+                $("#loadMorePlaceholder").hide();
+            }
+            currentPage++;
+        },
+        error: (error) => {
+           // if status code is not 200, hide the "Loading more..." placeholder.
+            $("#loadMorePlaceholder").hide();
+            console.error("Error loading more products:", error);
+        }
+    });
+};
+
+// When the user scrolls to the bottom of the document, load more data.
+$(window).scroll(function() {
+    if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
+        loadMoreData();
+    }
+});
+
+// Initial data load
+loadMoreData();
+
+
+      // Handle form submission
+      $("#searchForm").on("submit", (event) => {
+        event.preventDefault();
+        const searchQuery = $("#searchInput").val();
+        if (searchQuery.trim() === "") {
+          location.reload();
+        } else {
+          $("#loadMorePlaceholder").hide();
+          $.ajax({
+            url: `/search-products`,
+            method: "POST",
+            data: { searchQuery },
+            dataType: "json",
+            success: (results) => {
+              // Clear the existing product cards
+              $("#cont").empty();
+              
+              // Loop through the search results and create new product cards
+              results.forEach((product) => {
+                $("#cont").append(`
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 mt-5">
+                    <a href="${product.affiliate_link}" target="_blank" style="text-decoration: none;">
+                        <div class="card" data-product-id="${product.product_id}" style="width: 18rem">
+                          <img src="https://drive.google.com/uc?export=view&id=${product.product_link}" class="card-img-top" alt="..." />
+                          <div class="card-footer text-body-secondary text-center">
+                            Product Id: ${product.product_id}
+                          </div>
+                        </div>
+                        </a>
+                      </div>
+                `);
+              });
+            },
+            error: (error) => {
+              console.error("Error searching for products:", error);
+            },
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
